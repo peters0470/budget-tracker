@@ -27,4 +27,22 @@ self.addEventListener('install', function (e) {
     )
   
     self.skipWaiting();
-  })
+  });
+
+  // event listener for when activated:
+self.addEventListener("activate", (e) => {
+    // remove old caches
+    e.waitUntil(
+      caches.keys().then((keyList) => {
+        return Promise.all(
+          keyList.map((key) => {
+            if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
+              return caches.delete(key);
+            }
+          })
+        );
+      })
+    ) 
+
+    self.clients.claim();
+});
