@@ -50,3 +50,11 @@ request.onsuccess = function (event) {
         }
       };
     }
+
+    function deletePending() {
+        const transaction = db.transaction(["pending_transaction"], "readwrite");
+        const store = transaction.objectStore("pending_transaction");
+        store.clear();
+      }
+      
+      window.addEventListener("online", checkDatabase);
