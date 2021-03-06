@@ -46,3 +46,35 @@ self.addEventListener("activate", (e) => {
 
     self.clients.claim();
 });
+
+self.addEventListener("fetch", function (e) {
+    if (e.request.url.includes("/api/")) {
+      e.respondWith(
+        caches.open(DATA_CACHE_NAME).then(cache => {
+          return fetch(e.request)
+            .then(response => {
+              // If the response was good, clone it and store it in the cache.
+              if (response.status === 200) {
+                cache.put(e.request.url, response.clone());
+              }
+
+              return response;
+            })
+            .catch(err => {
+              // Network request failed, try to get it from the cache.
+              return cache.match(e.request);
+            });
+        }).catch(err => console.log(err))
+      );
+
+      return;
+    }
+});
+
+e.respondWith(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(e.request).then(response => {
+        return response || fetch(e.request);
+      });
+    })
+  );
