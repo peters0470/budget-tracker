@@ -14,8 +14,8 @@ const FILES_TO_CACHE = [
     "./icons/icon-512x512.png"
   ];
 
-const CACHE_NAME = "dude-cache-v1";
-const DATA_CACHE_NAME = "love-cache-v1";
+const CACHE_NAME = "static-cache-v1";
+const DATA_CACHE_NAME = "data-cache-v1";
 
 // This is the install event listener:
 self.addEventListener('install', function (e) {
