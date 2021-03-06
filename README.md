@@ -20,7 +20,7 @@
 
   ## Installation Instructions: 
   Run npm install in the terminal of the cloned application.  
-  Otherwise visit the deployed application at https://dashboard.heroku.com/apps/shielded-sands-92466 
+  Otherwise visit the deployed application at https://shielded-sands-92466.herokuapp.com/
 
   ## Test: 
   To test type npm start into the terminal
